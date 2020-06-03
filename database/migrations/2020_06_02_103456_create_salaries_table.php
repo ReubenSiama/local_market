@@ -15,7 +15,7 @@ class CreateSalariesTable extends Migration
     {
         Schema::create('salaries', function (Blueprint $table) {
             $table->id();
-            $table->string('salary_package');
+            $table->integer('salary_package_id');
             $table->enum('yearly_monthly', ['Yearly','Monthly']);
             $table->string('amount');
             $table->string('yearly_public_holidays');
