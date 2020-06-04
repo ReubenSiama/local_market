@@ -20,6 +20,7 @@ Route::get('/asset-types','ApiController@getAssetTypes');
 
 Route::post('/add-employee','EmployeeController@addEmployee');
 Route::get('/employees','EmployeeController@getEmployees');
+Route::get('/view-employee/{id}','EmployeeController@getEmployee');
 Route::resource('asset','AssetController');
 Route::get('/salary-packages','ApiController@getSalaryPackage');
 Route::resource('salary','SalaryController');

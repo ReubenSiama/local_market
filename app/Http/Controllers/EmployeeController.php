@@ -32,5 +32,11 @@ class EmployeeController extends Controller
         $role = Role::where('name','employee')->first();
         return User::where('role_id',$role->id)->with('department')->with('designation')->get();
     }
+
+    public function getEmployee($id)
+    {
+        $employee = User::where('id',$id)->with('department')->with('designation')->first();
+        return $employee;
+    }
 }
 

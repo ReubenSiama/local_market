@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/assets/precache-manifest.167f2bf40950f3815015c702dcf70477.js"
+  "/assets/precache-manifest.d341256ff3994de0505c9439f247f3a1.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "local-market"});
