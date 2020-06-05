@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\InterviewType;
 use App\SalaryPackage;
 use App\Designation;
 use App\Department;
@@ -28,5 +29,9 @@ class ApiController extends Controller
     public function getSalaryPackage()
     {
         return SalaryPackage::all();
+    }
+    public function getInterviewTypes()
+    {
+        return InterviewType::all();
     }
 }
