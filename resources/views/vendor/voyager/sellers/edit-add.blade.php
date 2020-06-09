@@ -43,18 +43,18 @@
               <label for="licence_type">Licence Type</label>
               <select name="license_type_id" id="licence_type" class="form-control">
                 <option value="">--Select--</option>
-                <option {{ $edit == 1 ? $seller->license_type_id == 1 ? 'selected' : '' : '' }} value="1">Private Limited Company</option>
-                <option {{ $edit == 1 ? $seller->license_type_id == 2 ? 'selected' : '' : '' }} value="2">Public Limited Company</option>
-                <option {{ $edit == 1 ? $seller->license_type_id == 3 ? 'selected' : '' : '' }} value="3">Partnership Firm</option>
+                @foreach ($license_type as $type)
+                    <option value="{{ $type->id }}" {{ $edit == 1 ? $seller->license_type_id == $type->id ? 'selected' : '' : '' }}>{{ $type->name }}</option>
+                @endforeach
               </select>
             </div>
             <div class="form-group">
               <label for="business_type">Business Type</label>
               <select name="business_type_id" id="business_type" class="form-control">
                 <option value="">--Select--</option>
-                <option {{ $edit == 1 ? $seller->business_type_id == 1 ? 'selected' : '' : '' }} value="1">Super Market</option>
-                <option {{ $edit == 1 ? $seller->business_type_id == 2 ? 'selected' : '' : '' }} value="2">Individual Seller</option>
-                <option {{ $edit == 1 ? $seller->business_type_id == 3 ? 'selected' : '' : '' }} value="3">Farmer</option>
+                @foreach ($business_type as $bType)
+                  <option value="{{ $bType->id }}" {{ $edit == 1 ? $seller->business_type_id == $bType->id ? 'selected' : '' : '' }}>{{ $bType->name }}</option>
+                @endforeach
               </select>
             </div>
             <div class="form-group">

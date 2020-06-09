@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Seller;
+use App\LicenseType;
+use App\BusinessType;
 use App\AddressOfSeller;
 use App\SellerBankAccount;
 use Illuminate\Http\Request;
@@ -16,7 +18,7 @@ class SellerController extends Controller
      */
     public function index()
     {
-        $sellers = Seller::get();
+        $sellers = Seller::with('licenseType')->get();
         return view('vendor.voyager.sellers.browse', ['sellers'=>$sellers]);
     }
 
@@ -27,7 +29,9 @@ class SellerController extends Controller
      */
     public function create()
     {
-        return view('vendor.voyager.sellers.edit-add', ['type'=>'add']);
+        $business_type = BusinessType::get();
+        $license_type = LicenseType::get();
+        return view('vendor.voyager.sellers.edit-add', ['type'=>'add', 'business_type'=>$business_type, 'license_type'=>$license_type]);
     }
 
     /**
@@ -113,7 +117,9 @@ class SellerController extends Controller
     public function edit($id)
     {
         $seller = Seller::findOrFail($id);
-        return view('vendor.voyager.sellers.edit-add', ['type'=>'Edit', 'seller'=>$seller]);
+        $business_type = BusinessType::get();
+        $license_type = LicenseType::get();
+        return view('vendor.voyager.sellers.edit-add', ['type'=>'Edit', 'seller'=>$seller, 'business_type'=>$business_type, 'license_type'=>$license_type]);
     }
 
     /**

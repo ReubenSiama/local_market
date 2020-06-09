@@ -19,17 +19,20 @@
                 @foreach ($chunk as $seller)
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="card text-center">
+                        <div class="card" style="border-style: solid; border-width: 1px;">
+                            <div class="card-header text-center" style="padding: 0.5rem;">{{ $seller->name_of_seller }}</div>
                             <div class="card-body">
-                                <h5 class="card-title">Name: {{ $seller->name_of_seller }}</h5>
-                                <p class="card-text">
-                                    Address: {{ $seller->address->full_address }}
-                                </p>
+                                <address>
+                                    {{ $seller->address->full_address }} ({{ $seller->licenseType->name }}), <br>
+                                    {{ $seller->nearest_landmark }} <br>
+                                    PIN Code: {{ $seller->address->pin_code }}
+                                </address>
                             </div>
-                            <div class="card-footer text-muted">
-                            <a href="{{ Route('voyager.sellers.edit',['id'=>$seller->id]) }}" class="btn">Edit</a>
+                            <div class="card-footer">
+                                <a href="{{ Route('voyager.sellers.edit',['id'=>$seller->id]) }}" class="btn btn-outline-dark">Edit</a>
+                                <a href="{{ Route('voyager.sellers.show',['id'=>$seller->id]) }}" class="btn float-right">View</a>
                             </div>
-                        </div>
+                          </div>
                     </div>
                 </div>
                 @endforeach

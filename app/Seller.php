@@ -36,5 +36,9 @@ class Seller extends Model
         return $this->hasOne(SellerBankAccount::class);
     }
 
+    public function licenseType()
+    {
+        return $this->belongsTo(LicenseType::class);
+    }
 
 }
