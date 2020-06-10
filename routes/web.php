@@ -19,4 +19,6 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+    Route::post('add-shop-image/{id}', 'SellerController@addShopImage')->name('add-shop-image');
+    Route::post('add-partner/{id}', 'SellerController@addPartner')->name('add-partner');
 });

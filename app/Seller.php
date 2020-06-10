@@ -41,4 +41,9 @@ class Seller extends Model
         return $this->belongsTo(LicenseType::class);
     }
 
+    public function shopImage()
+    {
+        return $this->hasMany(ShopImage::class);
+    }
+
 }

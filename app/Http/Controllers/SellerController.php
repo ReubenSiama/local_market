@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Seller;
+use App\ShopImage;
 use App\LicenseType;
 use App\BusinessType;
+use App\BusinessPartner;
+use App\InsideShopImage;
 use App\AddressOfSeller;
 use App\SellerBankAccount;
 use Illuminate\Http\Request;
@@ -196,5 +199,54 @@ class SellerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addShopImage(Request $request, $id)
+    {
+        for($i = 0; $i < count($request->type); $i++){
+            $imageFile = time().$request->seller_id.'.'.request()->imageFile[$i]->getClientOriginalExtension();
+            request()->imageFile[$i]->move(public_path('images/shop_images'), $imageFile);
+
+            if($request->type[$i] == 'outside_shop'){
+                $shopImage = new ShopImage;
+                $shopImage->seller_id = $id;
+                $shopImage->image = $imageFile;
+                $shopImage->save();
+            }else{
+                $shopImage = new InsideShopImage;
+                $shopImage->seller_id = $id;
+                $shopImage->image = $imageFile;
+                $shopImage->save();
+            }
+        }
+        return back()->withSuccess('Images Added');
+    }
+
+    public function addPartner(Request $request, $id)
+    {
+        for($i = 0; $i < count($request->owner_name); $i++){
+            $aadhar_image = time().$id.'.'.request()->aadhar_image[$i]->getClientOriginalExtension();
+            request()->aadhar_image[$i]->move(public_path('images/partner_images'), $aadhar_image);
+
+            $pan_card_image = time().$id.'.'.request()->pan_card_image[$i]->getClientOriginalExtension();
+            request()->pan_card_image[$i]->move(public_path('images/partner_images'), $pan_card_image);
+
+            $passport_size_photo = time().$id.'.'.request()->passport_size_photo[$i]->getClientOriginalExtension();
+            request()->passport_size_photo[$i]->move(public_path('images/partner_images'), $passport_size_photo);
+
+            $partners = new BusinessPartner;
+            $partners->seller_id = $id;
+            $partners->name_of_the_owner = $request->owner_name[$i];
+            $partners->mobile_number = $request->mobile_no[$i];
+            $partners->whatsapp_number = $request->whatsapp_no[$i];
+            $partners->email_id = $request->email[$i];
+            $partners->aadhar_card_no = $request->aadhar_no[$i];
+            $partners->aadhar_card_image = $aadhar_image;
+            $partners->pan_card_no = $request->pan_card_no[$i];
+            $partners->pan_card_image = $pan_card_image;
+            $partners->passport_size_photo = $passport_size_photo;
+            $partners->save();
+        }
+        return back()->withSuccess('Partners added successfully');
     }
 }
